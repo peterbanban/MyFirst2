@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <litepal>
+       <!--用于指定数据库名和版本号-->
+       <dbname value="Bookstore"></dbname>
+       <version value="2"></version>
+
+       <list>
+           <!--用于指定映射模型-->
+           <mapping class="com.example.administrator.mytest2.GeneralClass.Book"></mapping>
+       </list>
+    </litepal>

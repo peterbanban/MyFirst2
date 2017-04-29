@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.mytest2.ActivityClass.ServiceTest">
+    <com.example.administrator.mytest2.GeneralClass.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.example.administrator.mytest2.GeneralClass.TitleLayout>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_start"
+            android:text="启动服务"
+            android:layout_above="@+id/btn_stop"
+            android:layout_centerHorizontal="true"
+
+    />
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_stop"
+            android:text="停止服务"
+            android:layout_centerInParent="true"
+    />
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_startBind"
+            android:text="启动Intent服务"
+            android:layout_below="@id/btn_stop"
+            android:layout_centerHorizontal="true"
+
+    />
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_stopBind"
+            android:text="数据库操作"
+    android:layout_below="@id/btn_startBind"
+            android:layout_centerHorizontal="true"
+
+    />
+
+</RelativeLayout>
