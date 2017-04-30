@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.jar.Manifest;
 
 public class ContentProviderActivity extends AppCompatActivity {
-
+    int test=0;
     List<String> contentList=new ArrayList<>();
     ArrayAdapter<String> contentAdapter;
     @Override
