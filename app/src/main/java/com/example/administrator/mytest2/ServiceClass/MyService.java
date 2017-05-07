@@ -30,7 +30,7 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        //下面代码用于在通知栏显示服务的信息
+        //下面代码用于在通知栏显示服务的信息 pendingIntent用于设置下一步执行的意向
         Toast.makeText(context,"创建服务",Toast.LENGTH_LONG).show();
         Intent intent=new Intent(this, ServiceTest.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,0);
@@ -43,6 +43,7 @@ public class MyService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
         startForeground(1,notification);
+
     }
 
 

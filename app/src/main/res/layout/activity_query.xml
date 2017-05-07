@@ -89,4 +89,14 @@
               android:textColor="#fff"
               android:layout_centerHorizontal="true"
     />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_next1"
+        android:layout_below="@id/btn_select"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="下一页"
+    />
 </RelativeLayout>

@@ -2,9 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.administrator.mytest2">
 
-    <user-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
-    <uesr-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 获取访问联系人的权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <!--获取访问网络的权利-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- 获取访问sd卡关联目录的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name="org.litepal.LitePalApplication"
@@ -44,13 +51,32 @@
         <activity android:name=".ActivityClass.ContentProviderActivity">
         </activity>
 
-        <!--表示启动内容提供器和允许外部应用访问此内容提供器-->
+        <!-- 表示启动内容提供器和允许外部应用访问此内容提供器 -->
         <provider
             android:name=".ContentProviderClass.MyContentProvider"
             android:authorities="com.example.administrator.mytest2.MyContentProvider"
             android:enabled="true"
             android:exported="true">
         </provider>
+
+        <activity android:name=".ActivityClass.ChoosePictureActivity">
+        </activity>
+
+        <!-- 自定义内容提供者的共享路径 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.administrator.mytest2.ActivityClass.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+        <activity android:name=".ActivityClass.WebViewActivity">
+        </activity>
+        <activity android:name=".ActivityClass.WEBTestActivity">
+        </activity>
     </application>
 
 </manifest>

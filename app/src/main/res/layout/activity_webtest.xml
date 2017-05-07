@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.mytest2.ActivityClass.WEBTestActivity">
+   <com.example.administrator.mytest2.GeneralClass.TitleLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+   </com.example.administrator.mytest2.GeneralClass.TitleLayout>
+
+    <Button
+        android:id="@+id/bt_WEbVIEW"
+        android:text="使用WebView"
+        android:layout_marginLeft="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/bt_okHttp"
+        android:text="使用OKHttp"
+        android:layout_marginLeft="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/http_uri"
+        android:text="使用HttpURIConnection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+
+    />
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#333"
+        />
+
+
+
+    </ScrollView>
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>

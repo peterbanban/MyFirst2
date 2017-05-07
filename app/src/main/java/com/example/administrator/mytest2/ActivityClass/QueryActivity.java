@@ -1,6 +1,7 @@
 package com.example.administrator.mytest2.ActivityClass;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBar;
@@ -19,6 +20,7 @@ import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class QueryActivity extends AppCompatActivity implements View.OnClickListener {
     private MyDataBaseHelper dbHelp;
@@ -45,6 +47,7 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         Button btnDel1= (Button) findViewById(R.id.btn_del1);
         Button btnUpdate1= (Button) findViewById(R.id.btn_update1);
         Button btnSelect1= (Button) findViewById(R.id.btn_select1);
+        Button btnNext= (Button) findViewById(R.id.btn_next1);
         editInput= (EditText) findViewById(R.id.edit_input);
         btnAddQurey.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
@@ -57,7 +60,7 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
         btnDel1.setOnClickListener(this);
         btnSelect1.setOnClickListener(this);
         btnUpdate1.setOnClickListener(this);
-
+        btnNext.setOnClickListener(this);
     }
 
     @Override
@@ -131,6 +134,9 @@ public class QueryActivity extends AppCompatActivity implements View.OnClickList
                 List<Book> book2= DataSupport.findAll(Book.class);
                 editInput.setText(book2.get(0).getName()+""+book2.get(0).getPrice()+book2.get(1).getName()+""+book2.get(1).getPrice());
                 break;
+            case R.id.btn_next1:
+                Intent intent =new Intent(QueryActivity.this, ChoosePictureActivity.class);
+                startActivity(intent);
         }
 
     }
