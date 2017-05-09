@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.administrator.mytest2.HTTPRequest.HttpCallBackListener;
+import com.example.administrator.mytest2.HTTPRequest.HttpRequest;
 import com.example.administrator.mytest2.R;
 
 import org.w3c.dom.Text;
@@ -20,12 +22,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class WEBTestActivity extends AppCompatActivity implements View.OnClickListener{
     TextView textPlay;
+    TextView textPlay1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,7 @@ public class WEBTestActivity extends AppCompatActivity implements View.OnClickLi
         Button btnWebView= (Button) findViewById(R.id.bt_WEbVIEW);
         Button btnHttpUri= (Button) findViewById(R.id.http_uri);
         Button btnOkHttp= (Button) findViewById(R.id.bt_okHttp);
+         textPlay1= (TextView) findViewById(R.id.tv_play1);
          textPlay= (TextView) findViewById(R.id.tv_play);
         btnWebView.setOnClickListener(this);
         btnHttpUri.setOnClickListener(this);
@@ -50,82 +55,39 @@ public class WEBTestActivity extends AppCompatActivity implements View.OnClickLi
                  startActivity(intent);
                  break;
              case R.id.http_uri:
-                 sendRequestByHttpURLConnection();
+                 //使用安卓原生的HttpURLConnection向服务器发出请求
+//                 String responseData=HttpRequest.sendRequestByHttpURLConnection("https://www.qq.com");
+//                 showResponse(responseData);
+                 HttpRequest.sendRequestByHttpURLConnection("https://www.baidu.com", new HttpCallBackListener() {
+                     @Override
+                     public void onFinish(String response) {
+                         showResponse(response);
+                     }
+
+                     @Override
+                     public void onError(Exception e) {
+
+                     }
+                 });
                  break;
              case R.id.bt_okHttp:
-                 sendRequestByOkHttp();
+//                 使用开源库OKHttp向服务器发出请求
+                 HttpRequest.sendRequestByOkHttp("https://www.baidu.com", new okhttp3.Callback() {
+                     @Override
+                     public void onFailure(Call call, IOException e) {
+
+                     }
+
+                     @Override
+                     public void onResponse(Call call, Response response) throws IOException {
+                         String responseData=response.body().string();
+                         showResponse(responseData);
+                     }
+                 });
                  break;
              default:
                  break;
          }
-    }
-
-    private void sendRequestByOkHttp() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                OkHttpClient client=new OkHttpClient();
-                Request request=new Request.Builder()
-                        .url("https://www.baidu.com")
-                        .build();
-                try {
-                    Response response=client.newCall(request).execute();
-                    String responseData=response.body().string();
-                    showResponse(responseData);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }).start();
-    }
-
-    private void sendRequestByHttpURLConnection() {
-        //开启线程来发送网络请求
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection connection=null;
-                BufferedReader reader=null;
-
-                try {
-                    URL url=new URL("https://www.baidu.com");
-                    connection=(HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(8000);
-                    connection.setReadTimeout(8000);
-                    InputStream in=connection.getInputStream();
-                    //接下来对获取的输入流进行获取
-                    reader=new BufferedReader(new InputStreamReader(in));
-                    StringBuilder response=new StringBuilder();
-                    String line;
-                    while((line=reader.readLine())!=null){
-                        response.append(line);
-                    }
-                    showResponse(response.toString());
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-             finally {
-                    if (reader!=null){
-                        try {
-                            reader.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (connection!=null){
-                        connection.disconnect();
-                    }
-                }
-
-            }
-        }).start();
-
     }
 
     private void showResponse(final String response) {
@@ -133,6 +95,7 @@ public class WEBTestActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void run() {
                 textPlay.setText(response);
+                textPlay1.setText(HttpRequest.content);
             }
         });
     }
